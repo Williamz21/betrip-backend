@@ -1,4 +1,4 @@
-package com.example.betrip_backend_services.betripapp.shared.exception;
+package betrip.services.betrip_backend_services.betripapp.shared.exception;
 
 
 import org.springframework.http.HttpStatus;

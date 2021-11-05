@@ -1,4 +1,4 @@
-package com.example.betrip_backend_services;
+package betrip.services.betrip_backend_services;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
