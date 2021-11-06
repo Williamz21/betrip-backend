@@ -6,17 +6,8 @@ import org.springframework.context.annotation.Configuration;
 
 @Configuration("betripMappingConfiguration")
 public class MappingConfiguration {
-    //EJEMPLO DEL PROFE DE QUE VA EN ESTE ARCHIVO
-    /*@Bean
-    public PostMapper postMapper(){
-        return new PostMapper();
-    }
-
     @Bean
-    public CommentMapper commentMapper(){
-        return new CommentMapper();
+    public TravelerMapper travelerMapper(){
+        return new TravelerMapper();
     }
-    */
-
-
 }
