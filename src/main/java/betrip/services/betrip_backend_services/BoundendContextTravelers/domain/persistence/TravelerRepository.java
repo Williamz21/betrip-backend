@@ -1,6 +1,6 @@
-package betrip.services.betrip_backend_services.betripapp.domain.travelers.persistence;
+package betrip.services.betrip_backend_services.BoundendContextTravelers.domain.persistence;
 
-import betrip.services.betrip_backend_services.betripapp.domain.travelers.model.entity.Traveler;
+import betrip.services.betrip_backend_services.BoundendContextTravelers.domain.model.entity.Traveler;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 

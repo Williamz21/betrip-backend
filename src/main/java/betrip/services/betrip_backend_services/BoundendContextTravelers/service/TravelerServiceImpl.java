@@ -1,10 +1,10 @@
-package betrip.services.betrip_backend_services.betripapp.service;
+package betrip.services.betrip_backend_services.BoundendContextTravelers.service;
 
-import betrip.services.betrip_backend_services.betripapp.domain.travelers.model.entity.Traveler;
-import betrip.services.betrip_backend_services.betripapp.domain.travelers.persistence.TravelerRepository;
-import betrip.services.betrip_backend_services.betripapp.domain.travelers.service.TravelerService;
-import betrip.services.betrip_backend_services.betripapp.shared.exception.ResourceNotFoundException;
-import betrip.services.betrip_backend_services.betripapp.shared.exception.ResourceValidationException;
+import betrip.services.betrip_backend_services.BoundendContextTravelers.domain.model.entity.Traveler;
+import betrip.services.betrip_backend_services.BoundendContextTravelers.domain.persistence.TravelerRepository;
+import betrip.services.betrip_backend_services.BoundendContextTravelers.domain.service.TravelerService;
+import betrip.services.betrip_backend_services.shared.exception.ResourceNotFoundException;
+import betrip.services.betrip_backend_services.shared.exception.ResourceValidationException;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.http.ResponseEntity;

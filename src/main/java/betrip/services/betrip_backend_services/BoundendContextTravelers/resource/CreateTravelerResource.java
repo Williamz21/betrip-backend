@@ -1,4 +1,4 @@
-package betrip.services.betrip_backend_services.betripapp.resource;
+package betrip.services.betrip_backend_services.BoundendContextTravelers.resource;
 
 import lombok.*;
 

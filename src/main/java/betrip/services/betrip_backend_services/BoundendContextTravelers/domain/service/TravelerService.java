@@ -1,6 +1,6 @@
-package betrip.services.betrip_backend_services.betripapp.domain.travelers.service;
+package betrip.services.betrip_backend_services.BoundendContextTravelers.domain.service;
 
-import betrip.services.betrip_backend_services.betripapp.domain.travelers.model.entity.Traveler;
+import betrip.services.betrip_backend_services.BoundendContextTravelers.domain.model.entity.Traveler;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.http.ResponseEntity;

@@ -1,4 +1,4 @@
-package betrip.services.betrip_backend_services.betripapp.resource;
+package betrip.services.betrip_backend_services.BoundendContextTravelers.resource;
 
 import lombok.*;
 
@@ -17,3 +17,5 @@ public class TravelerResource {
     private String phoneNumber;
     private String pfp;
 }
+
+

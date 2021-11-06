@@ -1,6 +1,5 @@
-package betrip.services.betrip_backend_services.betripapp.domain.travelers.model.entity;
+package betrip.services.betrip_backend_services.BoundendContextTravelers.domain.model.entity;
 
-import betrip.services.betrip_backend_services.betripapp.shared.domain.model.AuditModel;
 import lombok.*;
 
 import javax.persistence.*;

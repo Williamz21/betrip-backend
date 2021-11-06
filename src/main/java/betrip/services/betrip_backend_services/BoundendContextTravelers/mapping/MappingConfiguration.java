@@ -1,4 +1,4 @@
-package betrip.services.betrip_backend_services.betripapp.mapping;
+package betrip.services.betrip_backend_services.BoundendContextTravelers.mapping;
 
 
 import org.springframework.context.annotation.Bean;

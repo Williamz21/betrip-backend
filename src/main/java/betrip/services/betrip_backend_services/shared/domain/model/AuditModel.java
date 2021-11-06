@@ -1,4 +1,4 @@
-package betrip.services.betrip_backend_services.betripapp.shared.domain.model;
+package betrip.services.betrip_backend_services.shared.domain.model;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import lombok.Getter;
