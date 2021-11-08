@@ -5,11 +5,18 @@ import betrip.services.betrip_backend_services.BoundendContextTravelers.mapping.
 import betrip.services.betrip_backend_services.BoundendContextTravelers.resource.CreateTravelerResource;
 import betrip.services.betrip_backend_services.BoundendContextTravelers.resource.TravelerResource;
 import betrip.services.betrip_backend_services.BoundendContextTravelers.resource.UpdateTravelerResource;
+import io.swagger.v3.oas.annotations.Operation;
+import io.swagger.v3.oas.annotations.media.Content;
+import io.swagger.v3.oas.annotations.media.Schema;
+import io.swagger.v3.oas.annotations.responses.ApiResponse;
+import io.swagger.v3.oas.annotations.responses.ApiResponses;
+import io.swagger.v3.oas.annotations.tags.Tag;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+@Tag(name="Travelers")
 @RestController
 @RequestMapping("/api/v1/travelers")
 public class TravellerController {
@@ -20,6 +27,21 @@ public class TravellerController {
         this.travelerService = travelerService;
         this.mapper = mapper;
     }
+    @Operation(summary="Get posts",description = "Get all Data From Databse PostgressSql")
+    @ApiResponses(value={
+            @ApiResponse(
+                    responseCode = "200",
+                    description = "Post Found",
+                    content = {
+                            @Content(
+                                    mediaType = "application/json",
+                                    schema = @Schema(
+                                            implementation = TravelerResource.class
+                                    )
+                            )
+                    }
+            )
+    })
     @GetMapping()
     public Page<TravelerResource> getAllTraveler(Pageable pageable){
 

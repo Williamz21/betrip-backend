@@ -1,5 +1,6 @@
 package betrip.services.betrip_backend_services.BoundendContextTravelers.domain.model.entity;
 
+import betrip.services.betrip_backend_services.shared.domain.model.AuditModel;
 import lombok.*;
 
 import javax.persistence.*;
@@ -14,7 +15,7 @@ import javax.validation.constraints.Size;
 @AllArgsConstructor
 @With
 @Table(name="travelers")
-public class Traveler  {
+public class Traveler extends AuditModel {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
