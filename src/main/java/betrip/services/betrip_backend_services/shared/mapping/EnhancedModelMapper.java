@@ -1,4 +1,4 @@
-package betrip.services.betrip_backend_services.betripapp.shared.mapping;
+package betrip.services.betrip_backend_services.shared.mapping;
 
 import org.modelmapper.ModelMapper;
 
