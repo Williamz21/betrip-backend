@@ -32,7 +32,6 @@ public class DriverRouteServiceImpl implements DriverRouteService {
         this.validator = validator;
     }
 
-
     @Override
     public List<DriverRoute> getAll() {
         return driverRoutesRepository.findAll();
@@ -45,10 +44,9 @@ public class DriverRouteServiceImpl implements DriverRouteService {
 
     @Override
     public Page<DriverRoute> getAllByDriverId(Long driverId, Pageable pageable) {
-        return driverRoutesRepository.findByDriverId(driverId, (org.springframework.data.domain.Pageable) pageable) ;
+        return driverRoutesRepository.findByDriverId(driverId, (org.springframework.data.domain.Pageable) pageable);
     }
-
-
+    
 
     @Override
     @Transactional
