@@ -19,6 +19,8 @@ public class CreateTravelerResource {
     @NotNull
     private String dni;
     @NotNull
+    private String username;
+    @NotNull
     private String email;
     @NotNull
     private String password;
