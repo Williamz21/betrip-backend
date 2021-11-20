@@ -2,21 +2,23 @@ package betrip.services.betrip_backend_services.BoundendContextTravelers.resourc
 
 import lombok.*;
 
+import java.util.List;
+
+
 @Getter
 @Setter
-@With
 @AllArgsConstructor
 @NoArgsConstructor
-public class TravelerResource {
+@With
+public class AuthenticateResource {
     private Long id;
+    private String username;
     private String name;
     private Long age;
     private String dni;
-    private String username;
     private String email;
-    private String password;
     private String phoneNumber;
+    private List<String> roles;
     private String pfp;
+    private String token;
 }
-
-
