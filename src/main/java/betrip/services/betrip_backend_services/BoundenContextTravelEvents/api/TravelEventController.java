@@ -27,7 +27,7 @@ public class TravelEventController {
         this.travelEventService = travelEventService;
         this.mapper = mapper;
     }
-    @Operation(summary="Get all travel-events",description = "Get all Data From Databse PostgressSql")
+    @Operation(summary="Get all travel-events",description = "Get all Data From Database PostgresSql")
     @ApiResponses(value={
             @ApiResponse(
                     responseCode = "200",

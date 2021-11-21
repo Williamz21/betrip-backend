@@ -1,8 +1,5 @@
 package betrip.services.betrip_backend_services.BoundendContextDriverRoutes.api;
 
-import betrip.services.betrip_backend_services.BoundenContextTravelEvents.resource.CreateTravelEventResource;
-import betrip.services.betrip_backend_services.BoundenContextTravelEvents.resource.TravelEventResource;
-import betrip.services.betrip_backend_services.BoundenContextTravelEvents.resource.UpdateTravelEventResource;
 import betrip.services.betrip_backend_services.BoundendContextDriverRoutes.domain.service.DriverRouteService;
 import betrip.services.betrip_backend_services.BoundendContextDriverRoutes.mapping.DriverRouteMapper;
 import betrip.services.betrip_backend_services.BoundendContextDriverRoutes.resource.CreateDriverRouteResource;
@@ -13,20 +10,25 @@ import io.swagger.v3.oas.annotations.media.Content;
 import io.swagger.v3.oas.annotations.media.Schema;
 import io.swagger.v3.oas.annotations.responses.ApiResponse;
 import io.swagger.v3.oas.annotations.responses.ApiResponses;
+import io.swagger.v3.oas.annotations.tags.Tag;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+@Tag(name="Driver-Routes")
+@RestController
+@RequestMapping("/api/v1")
 public class DriverRouteController {
     private final DriverRouteService driverRouteService;
     private final DriverRouteMapper mapper;
 
-    public DriverRouteMapper(DriverRouteService driverRouteService, DriverRouteMapper mapper) {
+    public DriverRouteController(DriverRouteService driverRouteService, DriverRouteMapper mapper) {
         this.driverRouteService = driverRouteService;
         this.mapper = mapper;
     }
-    @Operation(summary="Get all driver-routes",description = "Get all Data From Databse PostgressSql")
+
+    @Operation(summary="Get all driver-routes",description = "Get all Data From Database PostgresSql")
     @ApiResponses(value={
             @ApiResponse(
                     responseCode = "200",
