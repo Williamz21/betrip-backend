@@ -2,13 +2,8 @@ package betrip.services.betrip_backend_services.BoundendContextDrivers.api;
 
 import betrip.services.betrip_backend_services.BoundendContextDrivers.domain.service.DriverService;
 import betrip.services.betrip_backend_services.BoundendContextDrivers.mapping.DriverMapper;
-import betrip.services.betrip_backend_services.BoundendContextDrivers.domain.service.DriverService;
-import betrip.services.betrip_backend_services.BoundendContextDrivers.mapping.DriverMapper;
-import betrip.services.betrip_backend_services.BoundendContextDrivers.resource.CreateDriverResource;
 import betrip.services.betrip_backend_services.BoundendContextDrivers.resource.CreateDriverResource;
 import betrip.services.betrip_backend_services.BoundendContextDrivers.resource.DriverResource;
-import betrip.services.betrip_backend_services.BoundendContextDrivers.resource.DriverResource;
-import betrip.services.betrip_backend_services.BoundendContextDrivers.resource.UpdateDriverResource;
 import betrip.services.betrip_backend_services.BoundendContextDrivers.resource.UpdateDriverResource;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.media.Content;
@@ -25,6 +20,8 @@ import org.springframework.web.bind.annotation.*;
 @Tag(name="Drivers")
 @RestController
 @RequestMapping("/api/v1/drivers")
+@CrossOrigin(origins = "*", maxAge = 3600)
+
 public class DriverController {
     private final DriverService driverService;
     private final DriverMapper mapper;

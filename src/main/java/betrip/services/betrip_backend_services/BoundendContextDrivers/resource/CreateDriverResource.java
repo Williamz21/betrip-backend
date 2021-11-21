@@ -1,8 +1,14 @@
 package betrip.services.betrip_backend_services.BoundendContextDrivers.resource;
 
+import lombok.*;
+
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
-
+@Getter
+@Setter
+@With
+@NoArgsConstructor
+@AllArgsConstructor
 public class CreateDriverResource {
 
     @NotNull
@@ -43,7 +49,7 @@ public class CreateDriverResource {
     private String licence_plate;
 
     @NotNull
-    private String license_code;
+    private String licence_code;
 
     @NotNull
     private Long number_seats;

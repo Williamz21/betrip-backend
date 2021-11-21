@@ -1,10 +1,12 @@
 package betrip.services.betrip_backend_services.BoundenContextTravelEvents.resource;
 
+import betrip.services.betrip_backend_services.BoundendContextTravelers.domain.model.entity.Traveler;
 import lombok.Getter;
 import lombok.Setter;
 
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;
+import java.util.Set;
 
 @Getter
 @Setter
@@ -40,4 +42,7 @@ public class UpdateTravelEventResource {
     @NotNull
     @NotBlank
     private String travelerProfilePhotofUrl;
+
+    private Set<Traveler>passengers;
+
 }

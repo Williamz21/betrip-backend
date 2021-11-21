@@ -9,6 +9,8 @@ import lombok.*;
 import javax.persistence.*;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;
+import java.util.HashSet;
+import java.util.Set;
 
 @Getter
 @Setter
@@ -22,8 +24,6 @@ public class DriverRoute extends AuditModel {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @NotNull
-    private  Long driverId;
 
 
     @NotNull
@@ -54,6 +54,10 @@ public class DriverRoute extends AuditModel {
     @JoinColumn(name = "driver_id",nullable = false)
     @JsonIgnore
     private Driver driver;
-
+    @ManyToMany(fetch = FetchType.EAGER)
+    @JoinTable(name = "routesPassengers",
+            joinColumns = @JoinColumn(name="traveler_id"),
+            inverseJoinColumns= @JoinColumn(name = "travelEventsId"))
+    private Set<Traveler> passengers = new HashSet<>();
 
 }

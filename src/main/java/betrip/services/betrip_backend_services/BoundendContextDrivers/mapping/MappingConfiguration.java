@@ -4,7 +4,7 @@ import betrip.services.betrip_backend_services.BoundendContextTravelers.mapping.
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 
-
+@Configuration("DriversMappingConfiguration")
 public class MappingConfiguration {
     @Bean
     public DriverMapper driverMapper(){

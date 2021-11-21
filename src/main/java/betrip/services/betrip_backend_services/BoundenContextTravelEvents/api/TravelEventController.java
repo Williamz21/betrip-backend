@@ -4,6 +4,7 @@ import betrip.services.betrip_backend_services.BoundenContextTravelEvents.domain
 import betrip.services.betrip_backend_services.BoundenContextTravelEvents.mapping.TravelEventMapper;
 import betrip.services.betrip_backend_services.BoundenContextTravelEvents.resource.CreateTravelEventResource;
 import betrip.services.betrip_backend_services.BoundenContextTravelEvents.resource.TravelEventResource;
+import betrip.services.betrip_backend_services.BoundenContextTravelEvents.resource.TravelEvents;
 import betrip.services.betrip_backend_services.BoundenContextTravelEvents.resource.UpdateTravelEventResource;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.media.Content;
@@ -42,14 +43,19 @@ public class TravelEventController {
                     }
             )
     })
-    @GetMapping("/travel-events")
-    public Page<TravelEventResource> getAllPost(Pageable pageable){
+    @GetMapping("travel-events")
+    public Page<TravelEvents> getAllPost(Pageable pageable){
 
-        return mapper.modelToListToPage(travelEventService.getAll(),pageable);
+        return mapper.modelToListToPage2(travelEventService.getAll(),pageable);
     }
+    @GetMapping("travel-events/{travelEventId}")
+    public TravelEventResource getPostById(@PathVariable Long travelEventId){
+        return mapper.toResource(travelEventService.getById(travelEventId));
+    }
+
     @GetMapping("travelers/{travelerId}/travel-events")
-    public Page<TravelEventResource> getAllTravelEventsByPostId(@PathVariable Long travelerId, Pageable pageable){
-        return mapper.modelToListToPage(travelEventService.getAllByTravelerId(travelerId),pageable);
+    public Page<TravelEvents> getAllTravelEventsByPostId(@PathVariable Long travelerId, Pageable pageable){
+        return mapper.modelToListToPage2(travelEventService.getAllByTravelerId(travelerId),pageable);
     }
     @PostMapping("travelers/{travelerId}/travel-events")
     public TravelEventResource createTravelEvent(@PathVariable Long travelerId, @RequestBody CreateTravelEventResource request){

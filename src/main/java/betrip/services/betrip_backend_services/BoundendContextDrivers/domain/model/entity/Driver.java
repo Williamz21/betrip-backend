@@ -7,6 +7,8 @@ import javax.persistence.*;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
+import java.util.HashSet;
+import java.util.Set;
 
 @Getter
 @Setter
@@ -47,6 +49,7 @@ public class Driver extends AuditModel {
     @NotBlank
     @Size(max = 100)
     private String district;
+
 
     @NotNull
     @NotBlank

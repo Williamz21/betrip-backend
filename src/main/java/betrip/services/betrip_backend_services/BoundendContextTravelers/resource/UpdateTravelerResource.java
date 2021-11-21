@@ -17,8 +17,6 @@ public class UpdateTravelerResource {
     @NotNull
     private Long age;
     @NotNull
-    private String  username;
-    @NotNull
     private String dni;
     @NotNull
     private String email;

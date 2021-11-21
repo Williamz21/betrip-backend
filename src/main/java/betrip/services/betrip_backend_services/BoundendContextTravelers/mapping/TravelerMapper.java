@@ -1,11 +1,13 @@
 package betrip.services.betrip_backend_services.BoundendContextTravelers.mapping;
 
+import betrip.services.betrip_backend_services.BoundendContextDrivers.mapping.DriverMapper;
 import betrip.services.betrip_backend_services.BoundendContextTravelers.domain.model.entity.Traveler;
 import betrip.services.betrip_backend_services.BoundendContextTravelers.resource.CreateTravelerResource;
 import betrip.services.betrip_backend_services.BoundendContextTravelers.resource.TravelerResource;
 import betrip.services.betrip_backend_services.BoundendContextTravelers.resource.UpdateTravelerResource;
 import betrip.services.betrip_backend_services.shared.mapping.EnhancedModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.annotation.Bean;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageImpl;
 import org.springframework.data.domain.Pageable;

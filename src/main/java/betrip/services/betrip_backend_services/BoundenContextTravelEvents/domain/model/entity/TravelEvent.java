@@ -8,6 +8,8 @@ import lombok.*;
 import javax.persistence.*;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;
+import java.util.HashSet;
+import java.util.Set;
 
 @Getter
 @Setter
@@ -68,5 +70,14 @@ public class TravelEvent extends AuditModel {
     @JoinColumn(name = "traveler_id",nullable = false)
     @JsonIgnore
     private Traveler traveler;
+
+
+
+    @ManyToMany(fetch = FetchType.EAGER)
+    @JoinTable(name = "travelEventsPassengers",
+            joinColumns = @JoinColumn(name="traveler_id"),
+            inverseJoinColumns= @JoinColumn(name = "travelEventsId"))
+    private Set<Traveler> passengers = new HashSet<>();
+
 
 }
