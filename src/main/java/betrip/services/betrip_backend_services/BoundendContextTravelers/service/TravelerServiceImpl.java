@@ -3,6 +3,7 @@ package betrip.services.betrip_backend_services.BoundendContextTravelers.service
 import betrip.services.betrip_backend_services.BoundendContextTravelers.domain.model.entity.Traveler;
 import betrip.services.betrip_backend_services.BoundendContextTravelers.domain.persistence.TravelerRepository;
 import betrip.services.betrip_backend_services.BoundendContextTravelers.domain.service.TravelerService;
+import betrip.services.betrip_backend_services.BoundendContextTravelers.resource.AuthenticateRequest;
 import betrip.services.betrip_backend_services.shared.exception.ResourceNotFoundException;
 import betrip.services.betrip_backend_services.shared.exception.ResourceValidationException;
 import org.springframework.data.domain.Page;
@@ -109,7 +110,12 @@ public class TravelerServiceImpl implements TravelerService {
             return ResponseEntity.ok().build();
         }).orElseThrow(()->new ResourceNotFoundException(ENTITY,travelerId));
     }
+    @Override
+    public Traveler authenticate(AuthenticateRequest request){
+        Traveler h=travelerRepository.findByEmail(request.getEmail());
+        return travelerRepository.findById(h.getId()).orElseThrow(()->new ResourceNotFoundException(ENTITY,h.getId()));
 
+    }
 
 
 
