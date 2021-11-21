@@ -1,6 +1,8 @@
 package betrip.services.betrip_backend_services.BoundendContextDrivers.domain.service;
 
 import betrip.services.betrip_backend_services.BoundendContextDrivers.domain.model.entity.Driver;
+import betrip.services.betrip_backend_services.BoundendContextTravelers.domain.model.entity.Traveler;
+import betrip.services.betrip_backend_services.BoundendContextTravelers.resource.AuthenticateRequest;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.http.ResponseEntity;
@@ -14,5 +16,5 @@ public interface DriverService {
     Driver create(Driver driver);
     Driver update(Long driverId, Driver request);
     ResponseEntity<?> delete(Long driverId);
-
+    Driver authenticate (AuthenticateRequest request);
 }

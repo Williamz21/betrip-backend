@@ -3,6 +3,8 @@ package betrip.services.betrip_backend_services.BoundendContextDrivers.service;
 import betrip.services.betrip_backend_services.BoundendContextDrivers.domain.model.entity.Driver;
 import betrip.services.betrip_backend_services.BoundendContextDrivers.domain.persistence.DriverRepository;
 import betrip.services.betrip_backend_services.BoundendContextDrivers.domain.service.DriverService;
+import betrip.services.betrip_backend_services.BoundendContextTravelers.domain.model.entity.Traveler;
+import betrip.services.betrip_backend_services.BoundendContextTravelers.resource.AuthenticateRequest;
 import betrip.services.betrip_backend_services.shared.exception.ResourceNotFoundException;
 import betrip.services.betrip_backend_services.shared.exception.ResourceValidationException;
 import org.springframework.data.domain.Page;
@@ -110,6 +112,11 @@ public class DriverServiceImpl implements DriverService {
         }).orElseThrow(()->new ResourceNotFoundException(ENTITY,driverId));
     }
 
+    @Override
+    public Driver authenticate(AuthenticateRequest request){
+        Driver h=driverRepository.findByEmail(request.getEmail());
+        return driverRepository.findById(h.getId()).orElseThrow(()->new ResourceNotFoundException(ENTITY,h.getId()));
 
+    }
 
 }

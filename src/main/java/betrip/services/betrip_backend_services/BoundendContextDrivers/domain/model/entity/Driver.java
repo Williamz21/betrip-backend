@@ -42,7 +42,6 @@ public class Driver extends AuditModel {
 
     @NotNull
     @NotBlank
-    @Size(max = 100)
     private String Pfp;
 
     @NotNull

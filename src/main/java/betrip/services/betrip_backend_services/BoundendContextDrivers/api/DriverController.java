@@ -5,6 +5,8 @@ import betrip.services.betrip_backend_services.BoundendContextDrivers.mapping.Dr
 import betrip.services.betrip_backend_services.BoundendContextDrivers.resource.CreateDriverResource;
 import betrip.services.betrip_backend_services.BoundendContextDrivers.resource.DriverResource;
 import betrip.services.betrip_backend_services.BoundendContextDrivers.resource.UpdateDriverResource;
+import betrip.services.betrip_backend_services.BoundendContextTravelers.resource.AuthenticateRequest;
+import betrip.services.betrip_backend_services.BoundendContextTravelers.resource.TravelerResource;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.media.Content;
 import io.swagger.v3.oas.annotations.media.Schema;
@@ -65,5 +67,9 @@ public class DriverController {
     @DeleteMapping("{driverId}")
     public ResponseEntity<?> deleteDriver(@PathVariable Long driverId){
         return  driverService.delete(driverId);
+    }
+    @PostMapping("/auth/log-in")
+    public DriverResource authenticate(@RequestBody AuthenticateRequest request){
+        return mapper.toResource(driverService.authenticate(request));
     }
 }

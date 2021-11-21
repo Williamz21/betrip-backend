@@ -2,6 +2,7 @@ package betrip.services.betrip_backend_services.BoundendContextTravelers.api;
 
 import betrip.services.betrip_backend_services.BoundendContextTravelers.domain.service.TravelerService;
 import betrip.services.betrip_backend_services.BoundendContextTravelers.mapping.TravelerMapper;
+import betrip.services.betrip_backend_services.BoundendContextTravelers.resource.AuthenticateRequest;
 import betrip.services.betrip_backend_services.BoundendContextTravelers.resource.CreateTravelerResource;
 import betrip.services.betrip_backend_services.BoundendContextTravelers.resource.TravelerResource;
 import betrip.services.betrip_backend_services.BoundendContextTravelers.resource.UpdateTravelerResource;
@@ -66,5 +67,8 @@ public class TravellerController {
     public ResponseEntity<?> deleteTraveler(@PathVariable Long travelerId){
         return  travelerService.delete(travelerId);
     }
-
+    @PostMapping("/auth/log-in")
+    public TravelerResource authenticate(@RequestBody AuthenticateRequest request){
+        return mapper.toResource(travelerService.authenticate(request));
+    }
 }
