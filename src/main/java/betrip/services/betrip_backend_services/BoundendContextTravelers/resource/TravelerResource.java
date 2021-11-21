@@ -12,7 +12,6 @@ public class TravelerResource {
     private String name;
     private Long age;
     private String dni;
-    private String username;
     private String email;
     private String password;
     private String phoneNumber;

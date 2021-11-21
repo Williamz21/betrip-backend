@@ -1,9 +1,11 @@
 package betrip.services.betrip_backend_services.BoundenContextTravelEvents.resource;
 
+import betrip.services.betrip_backend_services.BoundendContextTravelers.domain.model.entity.Traveler;
 import lombok.*;
 
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;
+import java.util.Set;
 
 @Getter
 @Setter
@@ -42,4 +44,5 @@ public class CreateTravelEventResource {
     @NotNull
     @NotBlank
     private String travelerProfilePhotofUrl;
+    private Set<Traveler> passengers;
 }

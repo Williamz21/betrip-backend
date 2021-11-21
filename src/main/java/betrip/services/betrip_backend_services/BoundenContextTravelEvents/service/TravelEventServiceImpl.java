@@ -3,19 +3,23 @@ package betrip.services.betrip_backend_services.BoundenContextTravelEvents.servi
 import betrip.services.betrip_backend_services.BoundenContextTravelEvents.domain.model.entity.TravelEvent;
 import betrip.services.betrip_backend_services.BoundenContextTravelEvents.domain.persistence.TravelEventRepository;
 import betrip.services.betrip_backend_services.BoundenContextTravelEvents.domain.service.TravelEventService;
+import betrip.services.betrip_backend_services.BoundendContextTravelers.domain.model.entity.Traveler;
 import betrip.services.betrip_backend_services.BoundendContextTravelers.domain.persistence.TravelerRepository;
 import betrip.services.betrip_backend_services.shared.exception.ResourceNotFoundException;
 import betrip.services.betrip_backend_services.shared.exception.ResourceValidationException;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.http.ResponseEntity;
+
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import javax.validation.ConstraintViolation;
 import javax.validation.Validator;
+import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
+import java.util.stream.Collectors;
 
 @Service
 @Transactional(readOnly = true)
@@ -32,6 +36,11 @@ public class TravelEventServiceImpl implements TravelEventService {
         this.validator = validator;
     }
 
+    @Override
+    public TravelEvent getById(Long postId) {
+        return travelEventsRepository.findById(postId)
+                .orElseThrow(()-> new ResourceNotFoundException(ENTITY, postId));
+    }
 
     @Override
     public List<TravelEvent> getAll() {
@@ -48,9 +57,11 @@ public class TravelEventServiceImpl implements TravelEventService {
         return travelEventsRepository.findByTravelerId(travelerId,pageable);
     }
 
+
     @Override
     @Transactional
     public TravelEvent create(Long travelerId, TravelEvent request) {
+        Set<Traveler>passengers=new HashSet<>();
         Set<ConstraintViolation<TravelEvent>> violations=validator.validate(request);
         if(!violations.isEmpty()){
             throw new ResourceValidationException(ENTITY,violations);
@@ -58,6 +69,7 @@ public class TravelEventServiceImpl implements TravelEventService {
 
         return travelerRepository.findById(travelerId).map(travelEvent -> {
             request.setTraveler(travelEvent);
+            request.setPassengers(passengers);
             return travelEventsRepository.save(request);
         }).orElseThrow(()-> new ResourceNotFoundException("Post",travelerId));
     }
@@ -65,7 +77,8 @@ public class TravelEventServiceImpl implements TravelEventService {
     @Override
     @Transactional
     public TravelEvent update(Long travelerId, Long travelEventId, TravelEvent request) {
-        Set<ConstraintViolation<TravelEvent>>violations=validator.validate(request);
+        Set<ConstraintViolation<TravelEvent>> violations = validator.validate(request);
+        //Set<Traveler> travelers = request.getPassengers().stream().collect(Collectors.toSet());
         if(!violations.isEmpty()){
             throw new ResourceValidationException(ENTITY,violations);
         }
@@ -84,6 +97,7 @@ public class TravelEventServiceImpl implements TravelEventService {
                         .withType(request.getType())
                         .withPlate(request.getPlate())
                         .withTravelerProfilePhotofUrl(request.getTravelerProfilePhotofUrl())
+                        .withPassengers(request.getPassengers())
                 ))
                 .orElseThrow(()->new ResourceNotFoundException(ENTITY,travelerId));
     }

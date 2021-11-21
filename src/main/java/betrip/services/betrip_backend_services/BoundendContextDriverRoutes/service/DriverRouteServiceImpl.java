@@ -1,9 +1,11 @@
 package betrip.services.betrip_backend_services.BoundendContextDriverRoutes.service;
 
+import betrip.services.betrip_backend_services.BoundenContextTravelEvents.domain.model.entity.TravelEvent;
 import betrip.services.betrip_backend_services.BoundendContextDriverRoutes.domain.model.entity.DriverRoute;
 import betrip.services.betrip_backend_services.BoundendContextDriverRoutes.domain.persistence.DriverRouteRepository;
 import betrip.services.betrip_backend_services.BoundendContextDriverRoutes.domain.service.DriverRouteService;
 import betrip.services.betrip_backend_services.BoundendContextDrivers.domain.persistence.DriverRepository;
+import betrip.services.betrip_backend_services.BoundendContextTravelers.domain.model.entity.Traveler;
 import betrip.services.betrip_backend_services.shared.exception.ResourceNotFoundException;
 import betrip.services.betrip_backend_services.shared.exception.ResourceValidationException;
 import org.springframework.data.domain.Page;
@@ -14,6 +16,7 @@ import org.springframework.transaction.annotation.Transactional;
 
 import javax.validation.ConstraintViolation;
 import javax.validation.Validator;
+import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 
@@ -41,6 +44,11 @@ public class DriverRouteServiceImpl implements DriverRouteService {
     public List<DriverRoute> getAllByDriverId(Long driverId) {
         return  driverRoutesRepository.findByDriverId(driverId);
     }
+    @Override
+    public DriverRoute getById(Long postId) {
+        return driverRoutesRepository.findById(postId)
+                .orElseThrow(()-> new ResourceNotFoundException(ENTITY, postId));
+    }
 
     @Override
     public Page<DriverRoute> getAllByDriverId(Long driverId, Pageable pageable) {
@@ -53,6 +61,7 @@ public class DriverRouteServiceImpl implements DriverRouteService {
     @Override
     @Transactional
     public DriverRoute create(Long driverId, DriverRoute request) {
+        Set<Traveler>passengers=new HashSet<>();
         Set<ConstraintViolation<DriverRoute>> violations=validator.validate(request);
         if(!violations.isEmpty()){
             throw new ResourceValidationException(ENTITY,violations);
@@ -60,8 +69,9 @@ public class DriverRouteServiceImpl implements DriverRouteService {
 
         return driverRepository.findById(driverId).map(driverRoute -> {
             request.setDriver(driverRoute);
+            request.setPassengers(passengers);
             return driverRoutesRepository.save(request);
-        }).orElseThrow(()-> new ResourceNotFoundException("Post",driverId));
+        }).orElseThrow(()-> new ResourceNotFoundException("Driver",driverId));
     }
 
     @Override
@@ -74,14 +84,14 @@ public class DriverRouteServiceImpl implements DriverRouteService {
         if (!driverRepository.existsById(driverId))
             throw new ResourceNotFoundException("Post",driverId);
         return driverRoutesRepository.findById(driverRouteId).map(comment ->
-                        driverRoutesRepository.save(comment.
-                                withDriverId(request.getDriverId())
+                        driverRoutesRepository.save(comment
                                 .withDestiny(request.getDestiny())
                                 .withSeating(request.getSeating())
                                 .withStarting_point(request.getStarting_point())
                                 .withDeparture_time(request.getDeparture_time())
                                 .withDeparture_date(request.getDeparture_date())
                                 .withCost(request.getCost())
+                                .withPassengers(request.getPassengers())
                         ))
                 .orElseThrow(()->new ResourceNotFoundException(ENTITY,driverId));
     }

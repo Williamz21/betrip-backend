@@ -1,5 +1,6 @@
 package betrip.services.betrip_backend_services.BoundendContextDriverRoutes.api;
 
+import betrip.services.betrip_backend_services.BoundenContextTravelEvents.resource.TravelEventResource;
 import betrip.services.betrip_backend_services.BoundendContextDriverRoutes.domain.service.DriverRouteService;
 import betrip.services.betrip_backend_services.BoundendContextDriverRoutes.mapping.DriverRouteMapper;
 import betrip.services.betrip_backend_services.BoundendContextDriverRoutes.resource.CreateDriverRouteResource;
@@ -47,6 +48,10 @@ public class DriverRouteController {
     public Page<DriverRouteResource> getAllPost(Pageable pageable){
 
         return mapper.modelToListToPage(driverRouteService.getAll(),pageable);
+    }
+    @GetMapping("driver-routes/{routeId}")
+    public DriverRouteResource getPostById(@PathVariable Long routeId){
+        return mapper.toResource(driverRouteService.getById(routeId));
     }
     @GetMapping("drivers/{driverId}/driver-routes")
     public Page<DriverRouteResource> getAllDriverRoutesByPostId(@PathVariable Long driverId, Pageable pageable){

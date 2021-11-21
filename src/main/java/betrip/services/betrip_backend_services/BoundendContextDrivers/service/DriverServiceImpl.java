@@ -3,14 +3,12 @@ package betrip.services.betrip_backend_services.BoundendContextDrivers.service;
 import betrip.services.betrip_backend_services.BoundendContextDrivers.domain.model.entity.Driver;
 import betrip.services.betrip_backend_services.BoundendContextDrivers.domain.persistence.DriverRepository;
 import betrip.services.betrip_backend_services.BoundendContextDrivers.domain.service.DriverService;
-import betrip.services.betrip_backend_services.BoundendContextTravelers.domain.model.entity.Traveler;
 import betrip.services.betrip_backend_services.shared.exception.ResourceNotFoundException;
 import betrip.services.betrip_backend_services.shared.exception.ResourceValidationException;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
-import org.springframework.transaction.annotation.Transactional;
 
 import javax.validation.ConstraintViolation;
 import javax.validation.Validator;
@@ -19,8 +17,9 @@ import java.util.Set;
 
 
 @Service
-@Transactional(readOnly = true)
+
 public class DriverServiceImpl implements DriverService {
+
 
     private static final  String ENTITY="Driver";
     private final DriverRepository driverRepository;
@@ -70,7 +69,7 @@ public class DriverServiceImpl implements DriverService {
     }
 
     @Override
-    @Transactional
+
     public Driver update(Long driverId, Driver request) {
         Set<ConstraintViolation<Driver>> violations =validator.validate(request);
         if(!violations.isEmpty())
@@ -97,16 +96,20 @@ public class DriverServiceImpl implements DriverService {
                         .withEmail(request.getEmail())
                         .withPassword(request.getPassword())
                         .withPfp(request.getPfp())
+
                 ))
                 .orElseThrow(()->new ResourceNotFoundException(ENTITY,driverId));
     }
 
     @Override
-    @Transactional
+
     public ResponseEntity<?> delete(Long driverId) {
         return driverRepository.findById(driverId).map(driver->{
             driverRepository.delete(driver);
             return ResponseEntity.ok().build();
         }).orElseThrow(()->new ResourceNotFoundException(ENTITY,driverId));
     }
+
+
+
 }

@@ -35,12 +35,6 @@ public class Traveler extends AuditModel {
     @Column(unique = true)
     private  String dni;
 
-    @Size(max = 50)
-    @NotBlank
-    @Column(unique = true)
-    private String username;
-
-
     @NotNull
     @NotBlank
     @Size(max=100)
@@ -60,17 +54,7 @@ public class Traveler extends AuditModel {
     @NotNull
     @Size(max=1000)
     private  String pfp;
-    @ManyToMany(fetch = FetchType.EAGER)
-    @JoinTable(name = "user_roles",
-            joinColumns = @JoinColumn(name="user_id"),
-            inverseJoinColumns= @JoinColumn(name = "role_id"))
-    private Set<Role> roles = new HashSet<>();
 
 
-    public Traveler( String Username,String email, String password) {
-        this.username=Username;
-        this.email = email;
-        this.password = password;
-    }
 
 }

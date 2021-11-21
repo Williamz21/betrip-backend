@@ -15,4 +15,5 @@ public interface TravelEventRepository extends JpaRepository<TravelEvent,Long> {
     List<TravelEvent> findByTravelerId(Long travelerId);
     Page<TravelEvent> findByTravelerId(Long travelerId, Pageable pageable);
     Optional<TravelEvent> findByIdAndTravelerId(Long id, Long travelerId);
+    Optional<TravelEvent>findById(Long id);
 }

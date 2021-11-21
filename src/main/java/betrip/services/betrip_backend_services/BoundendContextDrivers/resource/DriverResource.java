@@ -24,7 +24,7 @@ public class DriverResource {
     private String model;
     private String brand;
     private String licence_plate;
-    private String license_code;
+    private String licence_code;
     private Long number_seats;
     private String phoneNumber;
 }

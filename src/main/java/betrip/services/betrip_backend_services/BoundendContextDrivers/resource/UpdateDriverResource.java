@@ -37,7 +37,7 @@ public class UpdateDriverResource {
     @NotNull
     private String licence_plate;
     @NotNull
-    private String license_code;
+    private String licence_code;
     @NotNull
     private Long number_seats;
     @NotNull
