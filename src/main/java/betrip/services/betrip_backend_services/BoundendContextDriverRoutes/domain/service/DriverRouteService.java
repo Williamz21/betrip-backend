@@ -1,11 +1,10 @@
 package betrip.services.betrip_backend_services.BoundendContextDriverRoutes.domain.service;
 
-import betrip.services.betrip_backend_services.BoundenContextTravelEvents.domain.model.entity.TravelEvent;
 import betrip.services.betrip_backend_services.BoundendContextDriverRoutes.domain.model.entity.DriverRoute;
 import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.http.ResponseEntity;
 
-import java.awt.print.Pageable;
 import java.util.List;
 
 public interface DriverRouteService {
