@@ -20,6 +20,8 @@ import org.springframework.web.bind.annotation.*;
 @Tag(name="Driver-Routes")
 @RestController
 @RequestMapping("/api/v1")
+@CrossOrigin(origins = "*", maxAge = 3600)
+
 public class DriverRouteController {
     private final DriverRouteService driverRouteService;
     private final DriverRouteMapper mapper;

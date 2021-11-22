@@ -17,12 +17,12 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
-import javax.validation.Valid;
-
 
 @Tag(name="Travelers")
 @RestController
 @RequestMapping("/api/v1/travelers")
+@CrossOrigin(origins = "*", maxAge = 3600)
+
 public class TravellerController {
    private final TravelerService travelerService;
     private final TravelerMapper mapper;
