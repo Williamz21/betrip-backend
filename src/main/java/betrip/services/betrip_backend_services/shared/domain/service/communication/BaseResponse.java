@@ -9,13 +9,13 @@ public abstract class BaseResponse<T> {
     private String message;
     private T resource;
 
-    public BaseResponse(String message){
-        this.success=false;
+    public BaseResponse(String message) {
+        this.success = false;
         this.message = message;
         this.resource = null;
     }
 
-    public BaseResponse(T resource){
+    public BaseResponse(T resource) {
         this.success = true;
         this.resource = resource;
         this.message = Strings.EMPTY;

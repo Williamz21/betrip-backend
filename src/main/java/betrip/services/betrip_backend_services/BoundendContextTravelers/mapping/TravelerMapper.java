@@ -1,11 +1,13 @@
 package betrip.services.betrip_backend_services.BoundendContextTravelers.mapping;
 
-import betrip.services.betrip_backend_services.BoundendContextDrivers.mapping.DriverMapper;
 import betrip.services.betrip_backend_services.BoundendContextTravelers.domain.model.entity.Traveler;
 import betrip.services.betrip_backend_services.BoundendContextTravelers.resource.CreateTravelerResource;
 import betrip.services.betrip_backend_services.BoundendContextTravelers.resource.TravelerResource;
 import betrip.services.betrip_backend_services.BoundendContextTravelers.resource.UpdateTravelerResource;
+import betrip.services.betrip_backend_services.security.domain.model.entity.Role;
 import betrip.services.betrip_backend_services.shared.mapping.EnhancedModelMapper;
+import org.modelmapper.AbstractConverter;
+import org.modelmapper.Converter;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.data.domain.Page;
@@ -27,6 +29,12 @@ public class TravelerMapper implements Serializable {
         return new PageImpl<>(mapper.mapList(modelList,TravelerResource.class),pageable, modelList.size());
     }
 
+    Converter<Role, String> roleToString = new AbstractConverter<>() {
+        @Override
+        protected String convert(Role role) {
+            return role == null ? null : role.getName().name();
+        }
+    };
     public Traveler toModel(CreateTravelerResource resource){
         return mapper.map(resource,Traveler.class);
     }

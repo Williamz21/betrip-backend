@@ -1,12 +1,11 @@
 package betrip.services.betrip_backend_services.BoundendContextDrivers.api;
 
 import betrip.services.betrip_backend_services.BoundendContextDrivers.domain.service.DriverService;
+import betrip.services.betrip_backend_services.BoundendContextDrivers.domain.service.communication.RegisterDriverRequest;
 import betrip.services.betrip_backend_services.BoundendContextDrivers.mapping.DriverMapper;
-import betrip.services.betrip_backend_services.BoundendContextDrivers.resource.CreateDriverResource;
 import betrip.services.betrip_backend_services.BoundendContextDrivers.resource.DriverResource;
 import betrip.services.betrip_backend_services.BoundendContextDrivers.resource.UpdateDriverResource;
-import betrip.services.betrip_backend_services.BoundendContextTravelers.resource.AuthenticateRequest;
-import betrip.services.betrip_backend_services.BoundendContextTravelers.resource.TravelerResource;
+import betrip.services.betrip_backend_services.security.domain.service.communication.AuthenticateRequest;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.media.Content;
 import io.swagger.v3.oas.annotations.media.Schema;
@@ -56,20 +55,13 @@ public class DriverController {
     public DriverResource getDriverById(@PathVariable Long driverId){
         return mapper.toResource(driverService.getById(driverId));
     }
-    @PostMapping
-    public DriverResource createDriver(@RequestBody CreateDriverResource request){
-        return mapper.toResource(driverService.create(mapper.toModel(request)));
+    @PostMapping("/auth/sign-in")
+    public ResponseEntity<?> logDriver(@RequestBody AuthenticateRequest request){
+        return driverService.authenticate(request);
     }
-    @PutMapping("{driverId}")
-    public DriverResource updateDriver(@PathVariable Long driverId, @RequestBody UpdateDriverResource request){
-        return mapper.toResource(driverService.update(driverId,mapper.toModel(request)));
+    @PostMapping("/auth/sign-up")
+    public ResponseEntity<?> regDriver(@RequestBody RegisterDriverRequest request){
+        return driverService.register(request);
     }
-    @DeleteMapping("{driverId}")
-    public ResponseEntity<?> deleteDriver(@PathVariable Long driverId){
-        return  driverService.delete(driverId);
-    }
-    @PostMapping("/auth/log-in")
-    public DriverResource authenticate(@RequestBody AuthenticateRequest request){
-        return mapper.toResource(driverService.authenticate(request));
-    }
+
 }

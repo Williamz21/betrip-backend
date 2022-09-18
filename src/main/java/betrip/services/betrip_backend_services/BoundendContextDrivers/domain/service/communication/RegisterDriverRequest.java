@@ -1,28 +1,17 @@
-package betrip.services.betrip_backend_services.BoundendContextDrivers.domain.model.entity;
+package betrip.services.betrip_backend_services.BoundendContextDrivers.domain.service.communication;
 
-import betrip.services.betrip_backend_services.security.domain.model.entity.Role;
-import betrip.services.betrip_backend_services.shared.domain.model.AuditModel;
-import lombok.*;
+import lombok.Getter;
+import lombok.Setter;
 
-import javax.persistence.*;
+import javax.persistence.Column;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
-import java.util.HashSet;
 import java.util.Set;
 
 @Getter
 @Setter
-@Entity
-@NoArgsConstructor
-@AllArgsConstructor
-@With
-@Table(name="drivers")
-public class Driver extends AuditModel {
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
-
+public class RegisterDriverRequest {
     @NotNull
     @NotBlank
     @Size(max = 100)
@@ -97,10 +86,5 @@ public class Driver extends AuditModel {
     @Column(unique = true)
     private  String phoneNumber;
 
-    @ManyToMany(fetch = FetchType.EAGER)
-    @JoinTable(name = "driver_roles",
-            joinColumns = @JoinColumn(name = "driver_id"),
-            inverseJoinColumns = @JoinColumn(name = "role_id"))
-    private Set<Role> roles = new HashSet<>();
-
+    private Set<String> roles;
 }

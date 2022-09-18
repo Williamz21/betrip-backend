@@ -1,11 +1,10 @@
 package betrip.services.betrip_backend_services.BoundendContextTravelers.api;
 
 import betrip.services.betrip_backend_services.BoundendContextTravelers.domain.service.TravelerService;
+import betrip.services.betrip_backend_services.BoundendContextTravelers.domain.service.communication.RegisterTravelerRequest;
 import betrip.services.betrip_backend_services.BoundendContextTravelers.mapping.TravelerMapper;
-import betrip.services.betrip_backend_services.BoundendContextTravelers.resource.AuthenticateRequest;
-import betrip.services.betrip_backend_services.BoundendContextTravelers.resource.CreateTravelerResource;
 import betrip.services.betrip_backend_services.BoundendContextTravelers.resource.TravelerResource;
-import betrip.services.betrip_backend_services.BoundendContextTravelers.resource.UpdateTravelerResource;
+import betrip.services.betrip_backend_services.security.domain.service.communication.AuthenticateRequest;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.media.Content;
 import io.swagger.v3.oas.annotations.media.Schema;
@@ -22,7 +21,6 @@ import org.springframework.web.bind.annotation.*;
 @RestController
 @RequestMapping("/api/v1/travelers")
 @CrossOrigin(origins = "*", maxAge = 3600)
-
 public class TravellerController {
    private final TravelerService travelerService;
     private final TravelerMapper mapper;
@@ -55,20 +53,13 @@ public class TravellerController {
     public TravelerResource getTravelerById(@PathVariable Long travelerId){
         return mapper.toResource(travelerService.getById(travelerId));
     }
-    @PostMapping
-    public TravelerResource createTraveler(@RequestBody CreateTravelerResource request){
-        return mapper.toResource(travelerService.create(mapper.toModel(request)));
+
+    @PostMapping("/auth/sign-in")
+    public ResponseEntity<?> logTraveler(@RequestBody AuthenticateRequest request){
+        return travelerService.authenticate(request);
     }
-    @PutMapping("{travelerId}")
-    public TravelerResource updateTraveler(@PathVariable Long travelerId, @RequestBody UpdateTravelerResource request){
-        return mapper.toResource(travelerService.update(travelerId,mapper.toModel(request)));
-    }
-    @DeleteMapping("{travelerId}")
-    public ResponseEntity<?> deleteTraveler(@PathVariable Long travelerId){
-        return  travelerService.delete(travelerId);
-    }
-    @PostMapping("/auth/log-in")
-    public TravelerResource authenticate(@RequestBody AuthenticateRequest request){
-        return mapper.toResource(travelerService.authenticate(request));
+    @PostMapping("/auth/sign-up")
+    public ResponseEntity<?> regTraveler(@RequestBody RegisterTravelerRequest request){
+        return travelerService.register(request);
     }
 }

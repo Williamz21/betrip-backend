@@ -4,7 +4,10 @@ import betrip.services.betrip_backend_services.BoundendContextDrivers.domain.mod
 import betrip.services.betrip_backend_services.BoundendContextDrivers.resource.CreateDriverResource;
 import betrip.services.betrip_backend_services.BoundendContextDrivers.resource.DriverResource;
 import betrip.services.betrip_backend_services.BoundendContextDrivers.resource.UpdateDriverResource;
+import betrip.services.betrip_backend_services.security.domain.model.entity.Role;
 import betrip.services.betrip_backend_services.shared.mapping.EnhancedModelMapper;
+import org.modelmapper.AbstractConverter;
+import org.modelmapper.Converter;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageImpl;
@@ -26,6 +29,12 @@ public class DriverMapper implements Serializable
         return new PageImpl<>(mapper.mapList(modelList,DriverResource.class),pageable, modelList.size());
     }
 
+    Converter<Role, String> roleToString = new AbstractConverter<>() {
+        @Override
+        protected String convert(Role role) {
+            return role == null ? null : role.getName().name();
+        }
+    };
     public Driver toModel(CreateDriverResource resource){
         return mapper.map(resource,Driver.class);
     }

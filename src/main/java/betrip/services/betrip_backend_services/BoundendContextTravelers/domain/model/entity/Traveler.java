@@ -1,5 +1,6 @@
 package betrip.services.betrip_backend_services.BoundendContextTravelers.domain.model.entity;
 
+import betrip.services.betrip_backend_services.security.domain.model.entity.Role;
 import betrip.services.betrip_backend_services.shared.domain.model.AuditModel;
 import lombok.*;
 
@@ -55,6 +56,10 @@ public class Traveler extends AuditModel {
     @Size(max=1000)
     private  String pfp;
 
-
+    @ManyToMany(fetch = FetchType.EAGER)
+    @JoinTable(name = "traveler_roles",
+            joinColumns = @JoinColumn(name = "traveler_id"),
+            inverseJoinColumns = @JoinColumn(name = "role_id"))
+    private Set<Role> roles = new HashSet<>();
 
 }

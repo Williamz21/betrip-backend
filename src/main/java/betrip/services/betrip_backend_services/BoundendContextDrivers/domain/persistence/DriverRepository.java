@@ -11,7 +11,7 @@ import java.util.Optional;
 public interface DriverRepository extends JpaRepository<Driver, Long> {
     Driver findByDni(String dni);
     Driver findByPassword(String dni);
-    Driver findByEmail(String dni);
+    Optional<Driver> findByEmail(String email);
     Driver findByPhoneNumber(String dni);
     Boolean existsByEmail(String email);
 }
